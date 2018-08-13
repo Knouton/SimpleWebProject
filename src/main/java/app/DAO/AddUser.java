@@ -9,26 +9,16 @@ import java.sql.SQLException;
 
 public class AddUser {
     public void addUser(User user) {
-        Connection connection = null;
-        PreparedStatement statement = null;
-        try {
-            connection = CreateConnection.getConnection();
+        String SQLcommand = ("INSERT INTO users (Name) VALUES ('" + user.getName() + "');");
+        //("INSERT INTO users (Name, password) VALUES ('" + user.getName() + "' , '" + user.getPassword()+"');")
+        try (Connection connection = CreateConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLcommand);
+                ) {
             connection.setAutoCommit(false);
-            statement = connection.prepareStatement
-                    ("INSERT INTO users (Name) VALUES ('" + user.getName() + "');");
-            //("INSERT INTO users (Name, password) VALUES ('" + user.getName() + "' , '" + user.getPassword()+"');")
-
-                statement.executeUpdate();
-                connection.commit();
-            } catch(SQLException e){
+            statement.executeUpdate();
+            connection.commit();
+        } catch(SQLException e){
                 e.printStackTrace();
-            } finally {
-            try {
-                connection.close();
-                statement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
         }
     }
+}

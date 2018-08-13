@@ -1,5 +1,6 @@
 package app.servlets;
 
+import app.DAO.AddUser;
 import app.entities.User;
 import app.model.Model;
 
@@ -21,8 +22,8 @@ public class AddServlet extends HttpServlet{
             String name = req.getParameter("name");
             String password = req.getParameter("pass");
             User user = new User(name, password);
-            Model model = Model.getInstance();
-            model.add(user);
+            AddUser addUser = new AddUser();
+            addUser.addUser(user);
 
 
             req.setAttribute("userName", name);

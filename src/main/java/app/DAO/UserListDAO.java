@@ -21,11 +21,12 @@ public class UserListDAO {
                 "javaDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
         Class.forName("com.mysql.jdbc.Driver").newInstance();*/
         List<String> usersList = new ArrayList<>();
+
         try (Connection connection = CreateConnection.getConnection();
             PreparedStatement statement = connection.prepareStatement("SELECT Name FROM users");
+            ResultSet resultSet = statement.executeQuery();
             ) {
             connection.setAutoCommit(false);
-            ResultSet resultSet = statement.executeQuery();
             connection.commit();
 
             while (resultSet.next()) {
