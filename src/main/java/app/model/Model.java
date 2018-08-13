@@ -18,7 +18,8 @@ public class Model {
     }
 
     public void add(User user) {
-        model.add(user);
+
+            model.add(user);
         }
 
     public void remove(String name) {
