@@ -2,7 +2,7 @@ package app.entities;
 
 import java.util.Objects;
 
-public class User {
+public class User implements CarcassUser{
     private String name;
     private String password;
 
